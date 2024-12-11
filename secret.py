@@ -12,32 +12,46 @@ SUPPORTED_LANGUAGES = {
     "php": "PHP",
 }
 
+def is_valid_encoding(content):
+    """Periksa apakah file dapat di-encode dengan UTF-8."""
+    try:
+        content.encode("utf-8")  # Pastikan dapat di-encode UTF-8
+        return True
+    except UnicodeEncodeError:
+        return False
+
 def obfuscate_python(content):
-    encoded_content = base64.b64encode(content.encode()).decode()
-    obfuscated_code = f"import base64\nexec(base64.b64decode('{encoded_content}').decode())"
-    return f"# Obfuscated by Wanz Xploit\n{obfuscated_code}"
+    encoded_content = base64.b64encode(content.encode("utf-8")).decode("utf-8")
+    obfuscated_code = f"""# Obfuscated by Wanz Xploit
+import base64
+exec(base64.b64decode('{encoded_content}').decode('utf-8'))
+"""
+    return obfuscated_code
 
 def obfuscate_bash(content):
-    encoded_content = base64.b64encode(content.encode()).decode()
-    obfuscated_code = f"#!/bin/bash\n# Obfuscated by Wanz Xploit\nbash <(echo {encoded_content} | base64 -d)"
-    return f"# Obfuscated by Wanz Xploit\n{obfuscated_code}"
+    encoded_content = base64.b64encode(content.encode("utf-8")).decode("utf-8")
+    obfuscated_code = f"""#!/bin/bash
+# Obfuscated by Wanz Xploit
+bash <(echo '{encoded_content}' | base64 -d)
+"""
+    return obfuscated_code
 
 def obfuscate_html(content):
-    encoded_content = base64.b64encode(content.encode()).decode()
+    encoded_content = base64.b64encode(content.encode("utf-8")).decode("utf-8")
     obfuscated_script = f"""<script>
 <!-- Obfuscated by Wanz Xploit -->
 document.write(atob("{encoded_content}"));
 </script>"""
-    return f"<!-- Obfuscated by Wanz Xploit -->\n{obfuscated_script}"
+    return obfuscated_script
 
 def obfuscate_javascript(content):
-    encoded_content = base64.b64encode(content.encode()).decode()
+    encoded_content = base64.b64encode(content.encode("utf-8")).decode("utf-8")
     return f"""// Obfuscated by Wanz Xploit
 eval(atob("{encoded_content}"));
 """
 
 def obfuscate_php(content):
-    encoded_content = base64.b64encode(content.encode()).decode()
+    encoded_content = base64.b64encode(content.encode("utf-8")).decode("utf-8")
     return f"""<?php
 /* Obfuscated by Wanz Xploit */
 
@@ -73,23 +87,38 @@ def obfuscate_file(file_path):
         sys.exit(1)
 
     language = SUPPORTED_LANGUAGES[ext]
-    with open(file_path, "r") as f:
-        content = f.read()
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:  # Baca file dengan encoding UTF-8
+            content = f.read()
 
-    obfuscated_content = obfuscate_content(content, language)
+        # Pemeriksaan apakah file bisa di-encode dengan UTF-8
+        if not is_valid_encoding(content):
+            raise ValueError("File contains non-UTF-8 characters or unsupported encoding.")
 
-    output_file = f"{os.path.splitext(file_path)[0]}_secret.{ext}"
-    with open(output_file, "w") as f:
-        f.write(obfuscated_content)
+        obfuscated_content = obfuscate_content(content, language)
+        output_file = f"{os.path.splitext(file_path)[0]}_secret.{ext}"
+        with open(output_file, "w", encoding="utf-8") as f:  # Tulis file dengan encoding UTF-8
+            f.write(obfuscated_content)
 
-    # Output in a table format with colors
-    print(f"\033[91m{' '*1}╔════════════════════════════════════════╗")
-    print(f"{'   '*1}By Wanz Xploit")
-    print(f"{'   '*1}Original File: {file_path}")
-    print(f"{'   '*1}Obfuscated File: {output_file}")
-    print(f"{' '*1}╚════════════════════════════════════════╝\033[0m")
+        # Tampilkan hasil sukses dengan warna hijau
+        print(f"\033[92m{' '*1}╔════════════════════════════════════════╗")
+        print(f"{'   '*1}Status: Success")
+        print(f"{'   '*1}Original File: {file_path}")
+        print(f"{'   '*1}Obfuscated File: {output_file}")
+        print(f"{' '*1}╚════════════════════════════════════════╝\033[0m")
+    except Exception as e:
+        # Tampilkan hasil gagal dengan warna merah
+        print(f"\033[91m{' '*1}╔════════════════════════════════════════╗")
+        print(f"{'   '*1}Status: Failed By Wanz Xploit")
+        print(f"{'   '*1}Original File: {file_path}")
+        print(f"{'   '*1}Obfuscated File: Unknown")
+        print(f"{'   '*1}English: {str(e)}")
+        print(f"{'   '*1}Suggestion: Check if the file contains valid UTF-8 characters.")
+        print(f"{'   '*1}Indonesia: File mengandung karakter non-UTF-8 atau encoding tidak didukung.")
+        print(f"{'   '*1}Saran: Pastikan file menggunakan encoding UTF-8 yang valid.")
+        print(f"{' '*1}╚════════════════════════════════════════╝\033[0m")
 
-    time.sleep(1)  # Delay 1 second to avoid spam
+        time.sleep(1)  # Delay 1 detik untuk menghindari spam
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
