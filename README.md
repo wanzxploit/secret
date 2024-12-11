@@ -1,132 +1,82 @@
-# Obfuscator Tool for Various Programming Languages
 
-This Bash script serves as an obfuscation tool designed to obscure source code files written in various programming languages. The tool provides a user-friendly menu-based interface to select the target programming language and obfuscate the chosen file, creating an obfuscated output file that is harder to understand and reverse engineer.
+# **Secret Tool**
 
-**screnshoot:**
+## Description
 
-![1](https://raw.githubusercontent.com/wanzxploit/obfuscator/main/obfuscator.png)
+**Secret Tool** is a tool for encoding and obfuscating files in various programming languages using base64 encoding. 
+This tool supports multiple languages such as Python, Bash, HTML, JavaScript, and PHP. With this tool, your files 
+will be protected and hard to read by unauthorized users.
 
-
-
-## Introduction
-
-This obfuscation tool is designed to assist developers in protecting their source code by generating obfuscated versions of their files. The tool currently supports various programming languages and provides a user-friendly interface to select the target language and specify the input/output file names required.
+It’s perfect for protecting source code or files that you want to hide the original content or protect from reverse engineering.
 
 ## Features
 
-- Obfuscates source code files for various programming languages.
-- Easy-to-use menu-based interface.
-- Generates obfuscated output files that are harder to reverse engineer.
-- Easily extensible to support additional programming languages.
+- **Supports multiple languages**: Python, Bash, HTML, JavaScript, PHP.
+- **Base64 Obfuscation**: Obfuscates code using base64 encoding to hide the original logic.
+- **Obfuscated output files**: The obfuscated files will be saved with the `_secret` suffix added to the file name.
+- **UTF-8 Encoding Validation**: Ensures the input files can be encoded with UTF-8.
+- **User-friendly**: Displays clear status messages for success or failure.
 
-## Getting Started
+## Installation
 
-### Dependencies
+### 1. Prerequisites
 
-Make sure you have the following dependencies installed on your system:
+Make sure you have Python 3 and pip installed on your system. If not, install them first:
 
-- `python`: Required for obfuscating Python code.
-- `npm` (Node.js): Required for obfuscating JavaScript code.
-- `gcc` (GNU Compiler Collection): Required for obfuscating C and C++ code.
-- `ruby`: Required for obfuscating Ruby code.
-- `php`: Required for obfuscating PHP code.
-- `swiftc`: Required for obfuscating Swift code.
-- `tr`: Required for obfuscating Bash code.
+#### On **Linux**:
+```bash
+sudo apt update
+sudo apt install python3 python3-pip
+```
 
-### Usage
+#### On **Termux**:
+```bash
+pkg update
+pkg install python
+```
 
-1. Copy this repository to your device.
-2. Open a terminal and navigate to the directory containing the script.
-3. Run the script with the command: `bash obfuscator.sh`
+### 2. Clone Repository and Install
 
-Follow the on-screen instructions to select the programming language and provide the required file names. The script will perform obfuscation based on the chosen language and create the obfuscated output file.
+Run the following commands in your terminal:
+```bash
+git clone https://github.com/wanzxploit/secret
+cd secret
+make install
+```
 
-#### In Termux:
+This will install the `secret` command and make it available globally in your terminal.
 
-If you're using Termux on an Android device, here are the installation steps:
+## Usage
 
-1. Open the Termux app.
-2. Run the following command to install the required tools:
+1. To obfuscate a file, simply use the command:
    ```bash
-   pkg update && pkg upgrade
-   pkg install git python npm ruby clang
-   npm install -g javascript-obfuscator
-   gem install bundler
-   ```
-3. Copy this repository by running the command:
-   ```bash
-   git clone https://github.com/wanzxploit/obfuscator.git
-   ```
-4. Navigate to the repository directory:
-   ```bash
-   cd obfuscator
-   ```
-5. Run the script:
-   ```bash
-   bash obfuscator.sh
+   secret <file>
    ```
 
-#### In Linux
+   For example:
+   ```bash
+   secret example.py
+   ```
+   The output file will be named `example_secret.py`.
 
-- Open a terminal and navigate to the directory containing the script.
-1. Open the Terminal.
-2. Run the following command to install the required tools:
+2. To clear all files and uninstall the tool, run:
    ```bash
-   sudo apt update && pkg upgrade
-   sudo apt install git python npm ruby clang
-   npm install -g javascript-obfuscator
-   gem install bundler
-   ```
-3. Copy this repository by running the command:
-   ```bash
-   git clone https://github.com/wanzxploit/obfuscator.git
-   ```
-4. Navigate to the repository directory:
-   ```bash
-   cd obfuscator
-   ```
-5. Run the script:
-   ```bash
-   bash obfuscator.sh
+   bash clear.sh
    ```
 
-## Supported Programming Languages
+## Supported Languages
 
-This tool currently supports obfuscation for the following programming languages:
+- Python (`.py`)
+- Bash (`.sh`)
+- HTML (`.html`)
+- JavaScript (`.js`)
+- PHP (`.php`)
 
-- HTML
-- Python
-- Java
-- C
-- C++
-- JavaScript
-- Ruby
-- PHP
-- Swift
-- Bash
-- Rust
-- Kotlin
-- Go
-- Perl
-- Lua
-- Scala
-- TypeScript
-- Haskell
-- R
-- MATLAB
+## Notes
 
-## Contributing
+- Ensure your files are encoded in UTF-8 for proper obfuscation.
+- Obfuscation is intended for protection but is not a substitute for secure coding practices.
 
-Contributions are welcome! If you'd like to add support for more programming languages or contribute to improving this tool, feel free to fork this repository, make your changes, and submit a pull request.
+## Credits
 
-## Disclaimer
-
-This tool is provided for educational and informational purposes only. The author is not responsible for any misuse or illegal activities carried out using this tool.
-
-## Author
-
-- Name: Wanz Xploit
-- Instagram: [https://www.instagram.com/wanz_xploit/](https://www.instagram.com/wanz_xploit/)
-- Facebook: [https://www.facebook.com/wanzxploit/](https://www.facebook.com/wanzxploit/)
-- YouTube: [https://www.youtube.com/c/WanzXploit](https://www.youtube.com/c/WanzXploit)
-- GitHub: [https://github.com/wanzxploit](https://github.com/wanzxploit)
+**Developed by Wanz Xploit**
