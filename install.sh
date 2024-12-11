@@ -60,6 +60,7 @@ else
     echo -e "\033[0;32mPATH sudah diperbarui. \033[0m"
 fi
 
+# Menjalankan source ~/.bashrc agar perubahan PATH diterapkan secara otomatis
 source ~/.bashrc &> /dev/null
 
 echo -e "\033[0;33mProses instalasi selesai! \033[0m"
