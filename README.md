@@ -1,5 +1,6 @@
 
 # **Secret Tool**
+![Banner](https://raw.githubusercontent.com/wanzxploit/secret/refs/heads/main/banner.png)
 
 ## Description
 
